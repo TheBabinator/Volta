@@ -1,0 +1,11 @@
+{
+  "parent": "volta:block/double_terminal",
+  "textures": {
+    "top": "volta:block/creative_cell",
+    "side": "volta:block/basic/side",
+    "bottom": "volta:block/basic/bottom",
+    "topT": "volta:block/terminal/top",
+    "sideT": "volta:block/terminal/side",
+    "particle": "#bottom"
+  }
+}

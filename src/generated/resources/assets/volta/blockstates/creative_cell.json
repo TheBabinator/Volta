@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "volta:block/creative_cell",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "volta:block/creative_cell"
+    },
+    "facing=south": {
+      "model": "volta:block/creative_cell",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "volta:block/creative_cell",
+      "y": 270
+    }
+  }
+}

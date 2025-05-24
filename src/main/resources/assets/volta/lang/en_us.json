@@ -1,0 +1,42 @@
+{
+  "itemGroup.volta.items": "Volta Items",
+  "itemGroup.volta.blocks": "Volta Blocks",
+  "itemGroup.volta.electronics": "Volta Electronics",
+  "itemGroup.volta.machines": "Volta Machines",
+
+  "item.volta.multimeter": "Multimeter",
+  "item.volta.empty_wire_spool": "Empty Wire Spool",
+  "item.volta.copper_wire_spool": "Copper Wire Spool",
+  "item.volta.waxed_copper_wire_spool": "Waxed Copper Wire Spool",
+  "item.volta.insulated_copper_wire_spool": "Insulated Copper Wire Spool",
+
+  "item.volta.copper_wire": "Copper Wire",
+  "item.volta.waxed_copper_wire": "Waxed Copper Wire",
+  "item.volta.insulated_copper_wire": "Insulated Copper Wire",
+
+  "block.volta.creative_cell": "Creative Cell",
+  "block.volta.capacitor_bank": "Capacitor Bank",
+  "block.volta.wall_bracket": "Wall Bracket",
+  "block.volta.double_wall_bracket": "Double Wall Bracket",
+
+  "quantity.voltage_reading": "Voltage Reading: ",
+  "quantity.terminal_capacitance": "Terminal Capacitance: ",
+  "quantity.internal_capacitance": "Internal Capacitance: ",
+  "quantity.supply_voltage": "Supply Voltage: ",
+  "quantity.unit_resistance": "Unit Resistance: ",
+  "quantity.current_rating": "Current Rating: ",
+  "quantity.insulation_rating": "Insulation Rating: ",
+
+  "unit.volt": "V",
+  "unit.farad": "F",
+  "unit.amp": "A",
+  "unit.ohm": "Ω",
+
+  "prefix.giga": "G",
+  "prefix.mega": "M",
+  "prefix.kilo": "k",
+  "prefix.unit": "",
+  "prefix.milli": "m",
+  "prefix.micro": "µ",
+  "prefix.nano": "n"
+}

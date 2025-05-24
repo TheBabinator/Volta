@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "volta:empty_wire_spool"
+    },
+    "X": {
+      "item": "volta:copper_wire"
+    }
+  },
+  "pattern": [
+    " X ",
+    "XOX",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "volta:copper_wire_spool"
+  }
+}

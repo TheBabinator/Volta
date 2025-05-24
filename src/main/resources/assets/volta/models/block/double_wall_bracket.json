@@ -1,0 +1,70 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "front0": "volta:block/bracket/front0",
+    "back0": "volta:block/bracket/back0",
+    "x0": "volta:block/bracket/x0",
+    "y0": "volta:block/bracket/y0",
+    "front1": "volta:block/bracket/front1",
+    "back1": "volta:block/bracket/back1",
+    "x1": "volta:block/bracket/x1",
+    "y1": "volta:block/bracket/y1",
+    "topT": "volta:block/terminal/top",
+    "sideT": "volta:block/terminal/side",
+    "particle": "#back0"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 14],
+      "to": [12, 16, 16],
+      "color": 3,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#front0"},
+        "east": {"uv": [16, 0, 0, 16], "texture": "#x0"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#back0"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#x0"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#y0"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#y0"}
+      }
+    },
+    {
+      "from": [5, 3, 12],
+      "to": [11, 13, 14],
+      "color": 4,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#front1"},
+        "east": {"uv": [16, 0, 0, 16], "texture": "#x1"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#back1"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#x1"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#y1"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#y1"}
+      }
+    },
+    {
+      "from": [7, 5, 8],
+      "to": [9, 7, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 5, 10]},
+      "color": 8,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#topT"},
+        "east": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#sideT"},
+        "west": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#sideT"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#sideT"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#sideT"}
+      }
+    },
+    {
+      "from": [7, 9, 8],
+      "to": [9, 11, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [0, 9, 10]},
+      "color": 8,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#topT"},
+        "east": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#sideT"},
+        "west": {"uv": [0, 16, 16, 0], "rotation": 90, "texture": "#sideT"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#sideT"},
+        "down": {"uv": [0, 16, 16, 0], "texture": "#sideT"}
+      }
+    }
+  ]
+}
