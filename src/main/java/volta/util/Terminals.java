@@ -154,7 +154,7 @@ public class Terminals {
             Item item = BuiltInRegistries.ITEM.byNameCodec().parse(NbtOps.INSTANCE, connectionTag.get("item")).getOrThrow();
             BlockPos blockPos = BlockPos.CODEC.parse(NbtOps.INSTANCE, connectionTag.get("target")).getOrThrow();
             int terminalIndex = connectionTag.getInt("index");
-            if (!level.hasChunk(SectionPos.blockToSectionCoord(blockPos.getX()), SectionPos.blockToSectionCoord(blockPos.getY()))) {
+            if (!level.hasChunk(SectionPos.blockToSectionCoord(blockPos.getX()), SectionPos.blockToSectionCoord(blockPos.getZ()))) {
                 continue;
             }
             if (level.getBlockEntity(blockPos) instanceof TerminalProvider connectedTerminalProvider) {
