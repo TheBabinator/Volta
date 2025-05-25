@@ -74,7 +74,7 @@ public class Simulation {
         for (Terminal connectedTerminal : getConnectedTerminals(terminal)) {
             removeConnections(terminal, connectedTerminal);
         }
-        for (Terminal connectedTerminal : getConnectedTerminals(terminal)) {
+        for (Terminal connectedTerminal : getReverseConnectedTerminals(terminal)) {
             removeConnections(connectedTerminal, terminal);
         }
     }

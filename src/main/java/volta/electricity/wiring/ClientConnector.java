@@ -141,11 +141,11 @@ public class ClientConnector {
             double r, g, b;
             if (potential > 0.0) {
                 r = 1.0;
-                g = Math.pow(0.95, potential);
-                b = Math.pow(0.85, potential);
+                g = Math.pow(0.98, potential);
+                b = Math.pow(0.92, potential);
             } else if (potential < 0.0) {
-                r = Math.pow(0.85, -potential);
-                g = Math.pow(0.95, -potential);
+                r = Math.pow(0.92, -potential);
+                g = Math.pow(0.98, -potential);
                 b = 1.0;
             } else {
                 r = 1.0;

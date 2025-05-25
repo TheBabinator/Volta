@@ -112,6 +112,7 @@ public class VoltaBlockEntity extends BlockEntity implements TerminalProvider {
             type.getInitializer().accept(this);
             Terminals.loadListFromTag(terminals, unappliedData, level.registryAccess());
             type.getLoader().accept(this, unappliedData);
+            unappliedData = null;
         }
         type.getTicker().accept(this);
     }

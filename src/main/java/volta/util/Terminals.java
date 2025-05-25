@@ -103,7 +103,7 @@ public class Terminals {
     }
 
     /**
-     * Rsetores the state of a terminal from NBT.
+     * Restores the state of a terminal from NBT.
      * @param terminal the terminal
      * @param tag the NBT tag containing the terminal data
      */
