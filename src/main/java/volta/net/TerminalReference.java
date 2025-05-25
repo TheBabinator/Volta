@@ -30,7 +30,7 @@ public record TerminalReference(BlockPos blockPos, int terminalIndex) {
     }
 
     public Terminal getTerminal(Level level) {
-        if (!level.hasChunk(SectionPos.blockToSectionCoord(blockPos.getX()), SectionPos.blockToSectionCoord(blockPos.getY()))) {
+        if (!level.hasChunk(SectionPos.blockToSectionCoord(blockPos.getX()), SectionPos.blockToSectionCoord(blockPos.getZ()))) {
             throw new IllegalArgumentException();
         }
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
