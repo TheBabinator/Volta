@@ -2,6 +2,7 @@ package volta.electricity.connections;
 
 import volta.electricity.Simulation;
 import volta.electricity.Terminal;
+import volta.util.Terminals;
 
 public abstract class CapacitiveConnection extends BaseConnection {
     private double charge;
@@ -16,7 +17,10 @@ public abstract class CapacitiveConnection extends BaseConnection {
 
     @Override
     public double getChargeFlow(Simulation simulation, Terminal positive, Terminal negative, double deltaTime) {
-        return 0.0;
+        double idealVoltage = charge / getCapacitance();
+        double chargeFlow = Terminals.flowSetVoltage(positive, negative, idealVoltage);
+        charge += chargeFlow;
+        return chargeFlow;
     }
 
     public abstract double getCapacitance();

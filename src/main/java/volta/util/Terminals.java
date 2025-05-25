@@ -1,7 +1,6 @@
 package volta.util;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -42,35 +41,23 @@ public class Terminals {
     }
 
     /**
-     * Calculates the greatest magnitude flow of charge possible between two terminals.
+     * Calculates the flow of charge required to add to the difference in potential between two terminals.
      * @param positive the positive terminal
      * @param negative the negative terminal
-     * @return the charge flow possible
+     * @param voltage the charge flow required
      */
-    public static double getMaximumChargeFlow(Terminal positive, Terminal negative) {
-        return getVoltage(positive, negative) * getCapacitance(positive, negative);
+    public static double flowAddVoltage(Terminal positive, Terminal negative, double voltage) {
+        return voltage * getCapacitance(positive, negative);
     }
 
     /**
-     * Adds a difference in potential between two terminals whilst respecting charge conservation.
+     * Calculates the flow of charge required to set to the difference in potential between two terminals.
      * @param positive the positive terminal
      * @param negative the negative terminal
-     * @param voltage the potential difference
+     * @param voltage the charge flow required
      */
-    public static void addVoltage(Terminal positive, Terminal negative, double voltage) {
-        double chargeFlow = voltage * getCapacitance(positive, negative);
-        positive.setChargeAndPotential(positive.getCharge() + chargeFlow);
-        negative.setChargeAndPotential(negative.getCharge() - chargeFlow);
-    }
-
-    /**
-     * Sets the difference in potential between two terminals whilst respecting charge conservation.
-     * @param positive the positive terminal
-     * @param negative the negative terminal
-     * @param voltage the potential difference
-     */
-    public static void setVoltage(Terminal positive, Terminal negative, double voltage) {
-        addVoltage(positive, negative, voltage - getVoltage(positive, negative));
+    public static double flowSetVoltage(Terminal positive, Terminal negative, double voltage) {
+        return flowAddVoltage(positive, negative, getVoltage(positive, negative) - voltage);
     }
 
     /**
@@ -78,12 +65,12 @@ public class Terminals {
      * @param terminals the list of terminals
      * @param tag the NBT tag containing the terminal data
      */
-    public static void loadListFromTag(List<Terminal> terminals, CompoundTag tag, HolderLookup.Provider registries) {
+    public static void loadListFromTag(List<Terminal> terminals, CompoundTag tag) {
         ListTag listTag = tag.getList("terminals", 10);
         int i = 0;
         for (Terminal terminal : terminals) {
             CompoundTag terminalTag = (CompoundTag) listTag.get(i++);
-            loadFromTag(terminal, terminalTag, registries);
+            loadFromTag(terminal, terminalTag);
         }
     }
 
@@ -92,11 +79,11 @@ public class Terminals {
      * @param terminals the list of terminals
      * @param tag the NBT tag to contain the terminal data
      */
-    public static void saveListIntoTag(List<Terminal> terminals, CompoundTag tag, HolderLookup.Provider registries) {
+    public static void saveListIntoTag(List<Terminal> terminals, CompoundTag tag) {
         ListTag listTag = new ListTag();
         for (Terminal terminal : terminals) {
             CompoundTag terminalTag = new CompoundTag();
-            saveIntoTag(terminal, terminalTag, registries);
+            saveIntoTag(terminal, terminalTag);
             listTag.add(terminalTag);
         }
         tag.put("terminals", listTag);
@@ -107,14 +94,14 @@ public class Terminals {
      * @param terminal the terminal
      * @param tag the NBT tag containing the terminal data
      */
-    public static void loadFromTag(Terminal terminal, CompoundTag tag, HolderLookup.Provider registries) {
+    public static void loadFromTag(Terminal terminal, CompoundTag tag) {
         terminal.setSignedEnergyStored(tag.getDouble("stored"));
         TerminalProvider terminalProvider = terminal.getTerminalProvider();
         if (terminalProvider == null) {
             return;
         }
-        loadConnectionListFromTag(terminal, tag, registries, false);
-        loadConnectionListFromTag(terminal, tag, registries, true);
+        loadConnectionListFromTag(terminal, tag, false);
+        loadConnectionListFromTag(terminal, tag, true);
     }
 
     /**
@@ -122,7 +109,7 @@ public class Terminals {
      * @param terminal the terminal
      * @param tag the NBT tag to contain the terminal data
      */
-    public static void saveIntoTag(Terminal terminal, CompoundTag tag, HolderLookup.Provider registries) {
+    public static void saveIntoTag(Terminal terminal, CompoundTag tag) {
         tag.putDouble("stored", terminal.getSignedEnergyStored());
         TerminalProvider terminalProvider = terminal.getTerminalProvider();
         if (terminalProvider == null) {
@@ -130,14 +117,14 @@ public class Terminals {
         }
         Simulation simulation = terminalProvider.getSimulation();
         for (Terminal connectedTerminal : simulation.getConnectedTerminals(terminal)) {
-            saveConnectionListIntoTag(terminal, connectedTerminal, tag, registries, false);
+            saveConnectionListIntoTag(terminal, connectedTerminal, tag, false);
         }
         for (Terminal connectedTerminal : simulation.getReverseConnectedTerminals(terminal)) {
-            saveConnectionListIntoTag(terminal, connectedTerminal, tag, registries, true);
+            saveConnectionListIntoTag(terminal, connectedTerminal, tag, true);
         }
     }
 
-    private static void loadConnectionListFromTag(Terminal terminal, CompoundTag tag, HolderLookup.Provider registries, boolean reversed) {
+    private static void loadConnectionListFromTag(Terminal terminal, CompoundTag tag, boolean reversed) {
         TerminalProvider terminalProvider = terminal.getTerminalProvider();
         if (terminalProvider == null) {
             return;
@@ -174,7 +161,7 @@ public class Terminals {
         }
     }
 
-    private static void saveConnectionListIntoTag(Terminal terminal, Terminal connectedTerminal, CompoundTag tag, HolderLookup.Provider registries, boolean reversed) {
+    private static void saveConnectionListIntoTag(Terminal terminal, Terminal connectedTerminal, CompoundTag tag, boolean reversed) {
         TerminalProvider connectedTerminalProvider = connectedTerminal.getTerminalProvider();
         if (connectedTerminalProvider == null) {
             return;

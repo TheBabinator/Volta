@@ -64,7 +64,7 @@ public class VoltaBlockEntity extends BlockEntity implements TerminalProvider {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        Terminals.saveListIntoTag(terminals, tag, registries);
+        Terminals.saveListIntoTag(terminals, tag);
         type.getSaver().accept(this, tag);
     }
 
@@ -106,11 +106,10 @@ public class VoltaBlockEntity extends BlockEntity implements TerminalProvider {
         }
         if (unappliedData != null) {
             for (Terminal terminal : terminals) {
-                simulation.removeTerminal(terminal);
-                simulation.addTerminal(terminal);
+                simulation.fullyRemoveConnections(terminal);
             }
             type.getInitializer().accept(this);
-            Terminals.loadListFromTag(terminals, unappliedData, level.registryAccess());
+            Terminals.loadListFromTag(terminals, unappliedData);
             type.getLoader().accept(this, unappliedData);
             unappliedData = null;
         }

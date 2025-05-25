@@ -7,7 +7,7 @@ import volta.util.Terminals;
 public abstract class ResistiveConnection extends BaseConnection {
     @Override
     public double getChargeFlow(Simulation simulation, Terminal positive, Terminal negative, double deltaTime) {
-        double maxFlow = Terminals.getMaximumChargeFlow(positive, negative);
+        double maxFlow = Terminals.flowSetVoltage(positive, negative, 0.0);
         double resistance = getResistance();
         double current;
         if (resistance > 0.0) {

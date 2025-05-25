@@ -9,8 +9,7 @@ import java.util.function.DoubleSupplier;
 public abstract class ElectromotiveConnection extends BaseConnection {
     @Override
     public double getChargeFlow(Simulation simulation, Terminal positive, Terminal negative, double deltaTime) {
-        double missingVoltage = Terminals.getVoltage(positive, negative) - getSupplyVoltage();
-        return missingVoltage * Terminals.getCapacitance(positive, negative);
+        return Terminals.flowSetVoltage(positive, negative, getSupplyVoltage());
     }
 
     public abstract double getSupplyVoltage();
