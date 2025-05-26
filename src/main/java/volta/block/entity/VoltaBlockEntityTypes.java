@@ -1,6 +1,5 @@
 package volta.block.entity;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
@@ -8,14 +7,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.slf4j.Logger;
 import volta.Volta;
 import volta.VoltaConfig;
 import volta.block.VoltaBlocks;
 import volta.electricity.Simulation;
 import volta.electricity.Terminal;
-import volta.electricity.connections.CapacitiveConnection;
-import volta.electricity.connections.ElectromotiveConnection;
+import volta.electricity.connections.*;
 import volta.lang.Quantity;
 import volta.util.SuperSupplier;
 
@@ -23,7 +20,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class VoltaBlockEntityTypes {
-    private static final Logger LOGGER = LogUtils.getLogger();
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Volta.ID);
 
     private static final List<Vec3> DOUBLE_TERMINAL = List.of(
@@ -62,31 +58,92 @@ public class VoltaBlockEntityTypes {
             ));
 
     public static final Supplier<VoltaBlockEntityType> CAPACITOR_BANK =
-            persistent("capacitor", () -> VoltaBlocks.CAPACITOR_BANK, DOUBLE_TERMINAL, entity -> {
-                LOGGER.debug("capacitor init");
+            persistent("capacitor_bank", () -> VoltaBlocks.CAPACITOR_BANK, DOUBLE_TERMINAL, entity -> {
                 entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
                         new CapacitiveConnection() {
                             @Override
                             public double getCapacitance() {
-                                return VoltaConfig.CAPACITOR_CAPACITANCE.getAsDouble();
+                                return VoltaConfig.CAPACITOR_BANK_CAPACITANCE.getAsDouble();
                             }
                         });
             }, (entity, tag) -> {
-                LOGGER.debug("capacitor load");
                 Simulation simulation = entity.getSimulation();
                 Terminal positive = entity.getTerminal(0);
                 Terminal negative = entity.getTerminal(1);
                 CapacitiveConnection capacitiveConnection = simulation.findConnection(positive, negative, CapacitiveConnection.class);
                 capacitiveConnection.setSignedEnergyStored(tag.getDouble("stored"));
             }, (entity, tag) -> {
-                LOGGER.debug("capacitor save");
                 Simulation simulation = entity.getSimulation();
                 Terminal positive = entity.getTerminal(0);
                 Terminal negative = entity.getTerminal(1);
                 CapacitiveConnection capacitiveConnection = simulation.findConnection(positive, negative, CapacitiveConnection.class);
                 tag.putDouble("stored", capacitiveConnection.getSignedEnergyStored());
             }, () -> List.of(
-                    Quantity.INTERNAL_CAPACITANCE.format(VoltaConfig.CAPACITOR_CAPACITANCE.getAsDouble())
+                    Quantity.INTERNAL_CAPACITANCE.format(VoltaConfig.CAPACITOR_BANK_CAPACITANCE.getAsDouble())
+            ));
+
+    public static final Supplier<VoltaBlockEntityType> INDUCTOR_BANK =
+            persistent("inductor_bank", () -> VoltaBlocks.INDUCTOR_BANK, DOUBLE_TERMINAL, entity -> {
+                entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
+                        new InductiveConnection() {
+                            @Override
+                            public double getInductance() {
+                                return VoltaConfig.INDUCTOR_BANK_INDUCTANCE.getAsDouble();
+                            }
+                        });
+            }, (entity, tag) -> {
+                Simulation simulation = entity.getSimulation();
+                Terminal positive = entity.getTerminal(0);
+                Terminal negative = entity.getTerminal(1);
+                InductiveConnection inductiveConnection = simulation.findConnection(positive, negative, InductiveConnection.class);
+                inductiveConnection.setSignedEnergyStored(tag.getDouble("stored"));
+            }, (entity, tag) -> {
+                Simulation simulation = entity.getSimulation();
+                Terminal positive = entity.getTerminal(0);
+                Terminal negative = entity.getTerminal(1);
+                InductiveConnection inductiveConnection = simulation.findConnection(positive, negative, InductiveConnection.class);
+                tag.putDouble("stored", inductiveConnection.getSignedEnergyStored());
+            }, () -> List.of(
+                    Quantity.INDUCTANCE.format(VoltaConfig.INDUCTOR_BANK_INDUCTANCE.getAsDouble())
+            ));
+
+    public static final Supplier<VoltaBlockEntityType> DIODE =
+            initialized("diode", () -> VoltaBlocks.DIODE, DOUBLE_TERMINAL, entity -> {
+                entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
+                        new DiodeConnection() {
+                            @Override
+                            public double getVoltageDrop() {
+                                return VoltaConfig.DIODE_VOLTAGE_DROP.getAsDouble();
+                            }
+                        });
+            }, () -> List.of(
+                    Quantity.VOLTAGE_DROP.format(VoltaConfig.DIODE_VOLTAGE_DROP.getAsDouble())
+            ));
+
+    public static final Supplier<VoltaBlockEntityType> NPN_TRANSISTOR =
+            initialized("npn_transistor", () -> VoltaBlocks.NPN_TRANSISTOR, TRI_TERMINAL, entity -> {
+                entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
+                        new TransistorConnection(entity.getTerminal(2)) {
+                            @Override
+                            public double getVoltageDrop() {
+                                return VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble();
+                            }
+                        });
+            }, () -> List.of(
+                    Quantity.VOLTAGE_DROP.format(VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble())
+            ));
+
+    public static final Supplier<VoltaBlockEntityType> PNP_TRANSISTOR =
+            initialized("pnp_transistor", () -> VoltaBlocks.PNP_TRANSISTOR, TRI_TERMINAL, entity -> {
+                entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
+                        new TransistorConnection(entity.getTerminal(2)) {
+                            @Override
+                            public double getVoltageDrop() {
+                                return VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble();
+                            }
+                        });
+            }, () -> List.of(
+                    Quantity.VOLTAGE_DROP.format(VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble())
             ));
 
     public static void register(IEventBus eventBus) {

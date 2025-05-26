@@ -20,6 +20,10 @@ public class VoltaBlocks {
 
     public static final Supplier<Block> CREATIVE_CELL = machine("creative_cell", VoltaBlockEntityTypes.CREATIVE_CELL);
     public static final Supplier<Block> CAPACITOR_BANK = machine("capacitor_bank", VoltaBlockEntityTypes.CAPACITOR_BANK);
+    public static final Supplier<Block> INDUCTOR_BANK = machine("inductor_bank", VoltaBlockEntityTypes.INDUCTOR_BANK);
+    public static final Supplier<Block> DIODE = machine("diode", VoltaBlockEntityTypes.DIODE);
+    public static final Supplier<Block> NPN_TRANSISTOR = machine("npn_transistor", VoltaBlockEntityTypes.NPN_TRANSISTOR);
+    public static final Supplier<Block> PNP_TRANSISTOR = machine("pnp_transistor", VoltaBlockEntityTypes.PNP_TRANSISTOR);
     public static final Supplier<Block> WALL_BRACKET = bracket("wall_bracket", VoltaBlockEntityTypes.WALL_BRACKET);
     public static final Supplier<Block> DOUBLE_WALL_BRACKET = bracket("double_wall_bracket", VoltaBlockEntityTypes.DOUBLE_WALL_BRACKET);
 

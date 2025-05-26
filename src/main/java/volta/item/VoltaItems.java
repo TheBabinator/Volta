@@ -43,6 +43,14 @@ public class VoltaItems {
             electronic("creative_cell", VoltaBlocks.CREATIVE_CELL);
     public static final Supplier<Item> CAPACITOR_BANK =
             electronic("capacitor_bank", VoltaBlocks.CAPACITOR_BANK);
+    public static final Supplier<Item> INDUCTOR_BANK =
+            electronic("inductor_bank", VoltaBlocks.INDUCTOR_BANK);
+    public static final Supplier<Item> DIODE =
+            electronic("diode", VoltaBlocks.DIODE);
+    public static final Supplier<Item> NPN_TRANSISTOR =
+            electronic("npn_transistor", VoltaBlocks.NPN_TRANSISTOR);
+    public static final Supplier<Item> PNP_TRANSISTOR =
+            electronic("pnp_transistor", VoltaBlocks.PNP_TRANSISTOR);
     public static final Supplier<Item> WALL_BRACKET =
             electronic("wall_bracket", VoltaBlocks.WALL_BRACKET);
     public static final Supplier<Item> DOUBLE_WALL_BRACKET =

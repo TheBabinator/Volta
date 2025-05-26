@@ -1,5 +1,9 @@
-// 1.21.1	2025-05-23T18:00:24.53873542	Block States: volta
+// 1.21.1	2025-05-26T12:36:56.473913848	Block States: volta
 1dcd3db442d533a227b3904498c37b72ce21fc99 assets/volta/blockstates/capacitor_bank.json
 4005639af5ddf54d39d31e74adb2166e1fedcdde assets/volta/blockstates/creative_cell.json
+154fb0b3a2c218e583321e1c0839b3c5d43fa57d assets/volta/blockstates/diode.json
 88d8d4e8ed74de71feb3624cf4425d19daedd050 assets/volta/blockstates/double_wall_bracket.json
+d09f0283e422c9e4cbaaab2d44089a44d8759c22 assets/volta/blockstates/inductor_bank.json
+0e80e1a4f5ac47f1d9c133e881d900e5e7950a20 assets/volta/blockstates/npn_transistor.json
+25a83c22c9b2b03539c55d469081b384440de7a1 assets/volta/blockstates/pnp_transistor.json
 dce500e1330da09aeeedcd190659b7900ebd540f assets/volta/blockstates/wall_bracket.json

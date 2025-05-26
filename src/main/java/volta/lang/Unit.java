@@ -6,9 +6,10 @@ import net.minecraft.network.chat.Component;
 public enum Unit {
     COULOMB("coulomb"),
     VOLT("volt"),
-    FARAD("farad"),
     AMP("amp"),
     OHM("ohm"),
+    FARAD("farad"),
+    HENRY("henry"),
     METRE("metre"),
     JOULE("joule"),
     WATT("watt"),

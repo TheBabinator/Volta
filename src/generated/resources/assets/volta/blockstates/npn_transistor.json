@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "volta:block/npn_transistor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "volta:block/npn_transistor"
+    },
+    "facing=south": {
+      "model": "volta:block/npn_transistor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "volta:block/npn_transistor",
+      "y": 270
+    }
+  }
+}

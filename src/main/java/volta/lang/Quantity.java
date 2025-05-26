@@ -7,7 +7,9 @@ public enum Quantity {
     VOLTAGE_READING("voltage_reading", Unit.VOLT, true),
     TERMINAL_CAPACITANCE("terminal_capacitance", Unit.FARAD, false),
     INTERNAL_CAPACITANCE("internal_capacitance", Unit.FARAD, false),
+    INDUCTANCE("inductance", Unit.HENRY, false),
     SUPPLY_VOLTAGE("supply_voltage", Unit.VOLT, false),
+    VOLTAGE_DROP("voltage_drop", Unit.VOLT, false),
     UNIT_RESISTANCE("unit_resistance", Unit.OHM, false),
     CURRENT_RATING("current_rating", Unit.AMP, false),
     INSULATION_RATING("insulation_rating", Unit.VOLT, false);

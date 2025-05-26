@@ -16,7 +16,7 @@ public class VoltaConfig {
             .defineInRange("simulationQuality", 50, 1, 1000);
 
     public static final DoubleSupplier TERMINAL_CAPACITANCE = BUILDER.comment("The capacitance of every machine's terminals, measured in farads.")
-            .defineInRange("terminalCapacitance", 0.05, 0.001, 1.0);
+            .defineInRange("terminalCapacitance", 0.02, 0.001, 1.0);
 
     public static final DoubleSupplier MINIMAL_VOLTAGE = BUILDER.comment("The limit for typical minimal voltage, measured in volts.")
             .defineInRange("minimalVoltage", 10.0, 1.0, 1000000.0);
@@ -33,11 +33,20 @@ public class VoltaConfig {
     public static final DoubleSupplier EXTREME_VOLTAGE = BUILDER.comment("The limit for typical extreme voltage, measured in volts.")
             .defineInRange("extremeVoltage", 10000.0, 1.0, 1000000.0);
 
-    public static final DoubleSupplier CREATIVE_CELL_SUPPLY_VOLTAGE = BUILDER.comment("The supply voltage of the creative cells.")
+    public static final DoubleSupplier CREATIVE_CELL_SUPPLY_VOLTAGE = BUILDER.comment("The supply voltage of the creative cells, measured in volts.")
             .defineInRange("creativeCellSupplyVoltage", 9.0, 1.0, 1000000.0);
 
-    public static final DoubleSupplier CAPACITOR_CAPACITANCE = BUILDER.comment("The capacitance of the capacitors.")
-            .defineInRange("capacitorCapacitance", 10.0, 1.0, 1000.0);
+    public static final DoubleSupplier CAPACITOR_BANK_CAPACITANCE = BUILDER.comment("The capacitance of capacitor banks, measured in farads.")
+            .defineInRange("capacitorBankCapacitance", 4.0, 1.0, 1000.0);
+
+    public static final DoubleSupplier INDUCTOR_BANK_INDUCTANCE = BUILDER.comment("The inductance of inductor banks, measured in henries.")
+            .defineInRange("inductorBankInductance", 4.0, 1.0, 1000.0);
+
+    public static final DoubleSupplier DIODE_VOLTAGE_DROP = BUILDER.comment("The voltage drop across diodes, measured in volts.")
+            .defineInRange("diodeVoltageDrop", 0.6, 0.0, 1000.0);
+
+    public static final DoubleSupplier TRANSISTOR_VOLTAGE_DROP = BUILDER.comment("The voltage drop across transistors, measured in volts.")
+            .defineInRange("transistorVoltageDrop", 0.2, 0.0, 1000.0);
 
     public static final DoubleSupplier COPPER_WIRE_RESISTANCE = BUILDER.comment("The resistance of copper wire over its length, measured in ohms per metre.")
             .defineInRange("copperWireResistance", 0.25, 0.001, 1000.0);

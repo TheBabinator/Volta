@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "volta:block/diode",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "volta:block/diode"
+    },
+    "facing=south": {
+      "model": "volta:block/diode",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "volta:block/diode",
+      "y": 270
+    }
+  }
+}
