@@ -44,7 +44,8 @@ public class Terminals {
      * Calculates the flow of charge required to add to the difference in potential between two terminals.
      * @param positive the positive terminal
      * @param negative the negative terminal
-     * @param voltage the charge flow required
+     * @param voltage the voltage to add
+     * @return the charge flow required
      */
     public static double flowAddVoltage(Terminal positive, Terminal negative, double voltage) {
         return voltage * getCapacitance(positive, negative);
@@ -54,10 +55,26 @@ public class Terminals {
      * Calculates the flow of charge required to set to the difference in potential between two terminals.
      * @param positive the positive terminal
      * @param negative the negative terminal
-     * @param voltage the charge flow required
+     * @param voltage the voltage to reach
+     * @return the charge flow required
      */
     public static double flowSetVoltage(Terminal positive, Terminal negative, double voltage) {
         return flowAddVoltage(positive, negative, getVoltage(positive, negative) - voltage);
+    }
+
+    /**
+     * Calculates the flow of charge in a diode.
+     * @param positive the positive terminal
+     * @param negative the negative terminal
+     * @param drop the voltage drop across the diode
+     * @return the charge flow required
+     */
+    public static double flowDiode(Terminal positive, Terminal negative, double drop) {
+        double voltage = Terminals.getVoltage(positive, negative);
+        if (voltage < drop) {
+            return 0.0;
+        }
+        return Terminals.flowSetVoltage(positive, negative, drop);
     }
 
     /**

@@ -27,12 +27,12 @@ public class VoltaBlockEntityTypes {
     );
 
     private static final List<Vec3> TRI_TERMINAL = List.of(
-            new Vec3(-0.3125, 0.4375, -0.3125), new Vec3(0.3125, 0.4375, -0.3125),
+            new Vec3(0.3125, 0.4375, -0.3125), new Vec3(-0.3125, 0.4375, -0.3125),
             new Vec3(0.0, 0.4375, 0.3125)
     );
 
     private static final List<Vec3> QUAD_TERMINAL = List.of(
-            new Vec3(-0.3125, 0.4375, -0.3125), new Vec3(0.3125, 0.4375, -0.3125),
+            new Vec3(0.3125, 0.4375, -0.3125), new Vec3(-0.3125, 0.4375, -0.3125),
             new Vec3(-0.3125, 0.4375, 0.3125), new Vec3(0.3125, 0.4375, 0.3125)
     );
 
@@ -109,7 +109,7 @@ public class VoltaBlockEntityTypes {
 
     public static final Supplier<VoltaBlockEntityType> DIODE =
             initialized("diode", () -> VoltaBlocks.DIODE, DOUBLE_TERMINAL, entity -> {
-                entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
+                entity.getSimulation().addConnection(entity.getTerminal(1), entity.getTerminal(0),
                         new DiodeConnection() {
                             @Override
                             public double getVoltageDrop() {
@@ -123,27 +123,39 @@ public class VoltaBlockEntityTypes {
     public static final Supplier<VoltaBlockEntityType> NPN_TRANSISTOR =
             initialized("npn_transistor", () -> VoltaBlocks.NPN_TRANSISTOR, TRI_TERMINAL, entity -> {
                 entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
-                        new TransistorConnection(entity.getTerminal(2)) {
+                        new NPNTransistorConnection(entity.getTerminal(2)) {
                             @Override
-                            public double getVoltageDrop() {
-                                return VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble();
+                            public double getBaseVoltageDrop() {
+                                return VoltaConfig.TRANSISTOR_BASE_VOLTAGE_DROP.getAsDouble();
+                            }
+
+                            @Override
+                            public double getCurrentGain() {
+                                return VoltaConfig.TRANSISTOR_CURRENT_GAIN.getAsDouble();
                             }
                         });
             }, () -> List.of(
-                    Quantity.VOLTAGE_DROP.format(VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble())
+                    Quantity.BASE_VOLTAGE_DROP.format(VoltaConfig.TRANSISTOR_BASE_VOLTAGE_DROP.getAsDouble()),
+                    Quantity.CURRENT_GAIN.format(VoltaConfig.TRANSISTOR_CURRENT_GAIN.getAsDouble())
             ));
 
     public static final Supplier<VoltaBlockEntityType> PNP_TRANSISTOR =
             initialized("pnp_transistor", () -> VoltaBlocks.PNP_TRANSISTOR, TRI_TERMINAL, entity -> {
                 entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
-                        new TransistorConnection(entity.getTerminal(2)) {
+                        new PNPTransistorConnection(entity.getTerminal(2)) {
                             @Override
-                            public double getVoltageDrop() {
-                                return VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble();
+                            public double getBaseVoltageDrop() {
+                                return VoltaConfig.TRANSISTOR_BASE_VOLTAGE_DROP.getAsDouble();
+                            }
+
+                            @Override
+                            public double getCurrentGain() {
+                                return VoltaConfig.TRANSISTOR_CURRENT_GAIN.getAsDouble();
                             }
                         });
             }, () -> List.of(
-                    Quantity.VOLTAGE_DROP.format(VoltaConfig.TRANSISTOR_VOLTAGE_DROP.getAsDouble())
+                    Quantity.BASE_VOLTAGE_DROP.format(VoltaConfig.TRANSISTOR_BASE_VOLTAGE_DROP.getAsDouble()),
+                    Quantity.CURRENT_GAIN.format(VoltaConfig.TRANSISTOR_CURRENT_GAIN.getAsDouble())
             ));
 
     public static void register(IEventBus eventBus) {

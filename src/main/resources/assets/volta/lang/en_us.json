@@ -25,14 +25,17 @@
 
   "quantity.voltage_reading": "Voltage Reading: ",
   "quantity.terminal_capacitance": "Terminal Capacitance: ",
-  "quantity.internal_capacitance": "Internal Capacitance: ",
+  "quantity.internal_capacitance": "Capacitance: ",
   "quantity.inductance": "Inductance: ",
   "quantity.supply_voltage": "Supply Voltage: ",
   "quantity.voltage_drop": "Voltage Drop: ",
+  "quantity.base_voltage_drop": "Base-Emitter Drop: ",
+  "quantity.current_gain": "Current Gain: ",
   "quantity.unit_resistance": "Unit Resistance: ",
   "quantity.current_rating": "Current Rating: ",
   "quantity.insulation_rating": "Insulation Rating: ",
 
+  "unit.ratio": "x",
   "unit.volt": "V",
   "unit.amp": "A",
   "unit.ohm": "Ω",

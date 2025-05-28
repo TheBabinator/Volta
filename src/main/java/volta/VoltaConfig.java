@@ -45,8 +45,11 @@ public class VoltaConfig {
     public static final DoubleSupplier DIODE_VOLTAGE_DROP = BUILDER.comment("The voltage drop across diodes, measured in volts.")
             .defineInRange("diodeVoltageDrop", 0.6, 0.0, 1000.0);
 
-    public static final DoubleSupplier TRANSISTOR_VOLTAGE_DROP = BUILDER.comment("The voltage drop across transistors, measured in volts.")
-            .defineInRange("transistorVoltageDrop", 0.2, 0.0, 1000.0);
+    public static final DoubleSupplier TRANSISTOR_BASE_VOLTAGE_DROP = BUILDER.comment("The voltage drop of transistors from base to emitter, measured in volts.")
+            .defineInRange("transistorBaseVoltageDrop", 0.6, 0.0, 1000.0);
+
+    public static final DoubleSupplier TRANSISTOR_CURRENT_GAIN = BUILDER.comment("The current gain across transistors, measured as a ratio.")
+            .defineInRange("transistorCurrentGain", 100.0, 1.0, 1000.0);
 
     public static final DoubleSupplier COPPER_WIRE_RESISTANCE = BUILDER.comment("The resistance of copper wire over its length, measured in ohms per metre.")
             .defineInRange("copperWireResistance", 0.25, 0.001, 1000.0);

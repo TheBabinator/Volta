@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 public enum Unit {
+    RATIO("ratio"),
     COULOMB("coulomb"),
     VOLT("volt"),
     AMP("amp"),

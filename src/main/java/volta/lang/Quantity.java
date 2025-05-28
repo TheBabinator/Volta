@@ -10,6 +10,8 @@ public enum Quantity {
     INDUCTANCE("inductance", Unit.HENRY, false),
     SUPPLY_VOLTAGE("supply_voltage", Unit.VOLT, false),
     VOLTAGE_DROP("voltage_drop", Unit.VOLT, false),
+    BASE_VOLTAGE_DROP("base_voltage_drop", Unit.VOLT, false),
+    CURRENT_GAIN("current_gain", Unit.RATIO, false),
     UNIT_RESISTANCE("unit_resistance", Unit.OHM, false),
     CURRENT_RATING("current_rating", Unit.AMP, false),
     INSULATION_RATING("insulation_rating", Unit.VOLT, false);
