@@ -3,6 +3,7 @@ package volta.electricity.wiring;
 public enum WireStyle {
     COPPER(0xC15A36, 0xE77C56, 0.03125f),
     INSULATED_COPPER(0x111111, 0xE77C56, 0.03125f),
+    RESISTIVE(0x111111, 0x515151, 0.03125f),
     MULTIMETER(0x959595, 0xABABAB, 0.03125f),
     UNSPOOLING(0x951111, 0xAB1111, 0.03125f);
 

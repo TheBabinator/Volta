@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,powered=false": {
+      "model": "volta:block/selector_switch",
+      "y": 90
+    },
+    "facing=east,powered=true": {
+      "model": "volta:block/selector_switch_closed",
+      "y": 90
+    },
+    "facing=north,powered=false": {
+      "model": "volta:block/selector_switch"
+    },
+    "facing=north,powered=true": {
+      "model": "volta:block/selector_switch_closed"
+    },
+    "facing=south,powered=false": {
+      "model": "volta:block/selector_switch",
+      "y": 180
+    },
+    "facing=south,powered=true": {
+      "model": "volta:block/selector_switch_closed",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "volta:block/selector_switch",
+      "y": 270
+    },
+    "facing=west,powered=true": {
+      "model": "volta:block/selector_switch_closed",
+      "y": 270
+    }
+  }
+}

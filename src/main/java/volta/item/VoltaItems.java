@@ -34,6 +34,8 @@ public class VoltaItems {
             item("waxed_copper_wire_spool", 16, FilledSpoolItem::new, WireType.WAXED_COPPER);
     public static final Supplier<Item> INSULATED_COPPER_WIRE_SPOOL =
             item("insulated_copper_wire_spool", 16, FilledSpoolItem::new, WireType.INSULATED_COPPER);
+    public static final Supplier<Item> RESISTIVE_WIRE_SPOOL =
+            item("resistive_wire_spool", 16, FilledSpoolItem::new, WireType.RESISTIVE);
 
     public static final Supplier<Item> COPPER_WIRE = item("copper_wire");
     public static final Supplier<Item> WAXED_COPPER_WIRE = item("waxed_copper_wire");
@@ -45,16 +47,20 @@ public class VoltaItems {
             electronic("capacitor_bank", VoltaBlocks.CAPACITOR_BANK);
     public static final Supplier<Item> INDUCTOR_BANK =
             electronic("inductor_bank", VoltaBlocks.INDUCTOR_BANK);
-    public static final Supplier<Item> DIODE =
-            electronic("diode", VoltaBlocks.DIODE);
-    public static final Supplier<Item> NPN_TRANSISTOR =
-            electronic("npn_transistor", VoltaBlocks.NPN_TRANSISTOR);
-    public static final Supplier<Item> PNP_TRANSISTOR =
-            electronic("pnp_transistor", VoltaBlocks.PNP_TRANSISTOR);
+    public static final Supplier<Item> DIODE_BLOCK =
+            electronic("diode_block", VoltaBlocks.DIODE_BLOCK);
+    public static final Supplier<Item> NPN_TRANSISTOR_BLOCK =
+            electronic("npn_transistor_block", VoltaBlocks.NPN_TRANSISTOR_BLOCK);
+    public static final Supplier<Item> PNP_TRANSISTOR_BLOCK =
+            electronic("pnp_transistor_block", VoltaBlocks.PNP_TRANSISTOR_BLOCK);
     public static final Supplier<Item> WALL_BRACKET =
             electronic("wall_bracket", VoltaBlocks.WALL_BRACKET);
     public static final Supplier<Item> DOUBLE_WALL_BRACKET =
             electronic("double_wall_bracket", VoltaBlocks.DOUBLE_WALL_BRACKET);
+    public static final Supplier<Item> BREAKER_SWITCH =
+            electronic("breaker_switch", VoltaBlocks.BREAKER_SWITCH);
+    public static final Supplier<Item> SELECTOR_SWITCH =
+            electronic("selector_switch", VoltaBlocks.SELECTOR_SWITCH);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

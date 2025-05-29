@@ -12,7 +12,7 @@ public enum Quantity {
     VOLTAGE_DROP("voltage_drop", Unit.VOLT, false),
     BASE_VOLTAGE_DROP("base_voltage_drop", Unit.VOLT, false),
     CURRENT_GAIN("current_gain", Unit.RATIO, false),
-    UNIT_RESISTANCE("unit_resistance", Unit.OHM, false),
+    UNIT_RESISTANCE("unit_resistance", Unit.OHMS_PER_METRE, false),
     CURRENT_RATING("current_rating", Unit.AMP, false),
     INSULATION_RATING("insulation_rating", Unit.VOLT, false);
 

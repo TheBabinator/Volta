@@ -5,9 +5,10 @@ import volta.VoltaConfig;
 import java.util.function.DoubleSupplier;
 
 public enum WireType {
-    COPPER(WireStyle.COPPER, VoltaConfig.COPPER_WIRE_RESISTANCE, VoltaConfig.COPPER_WIRE_CURRENT_RATING, VoltaConfig.MINIMAL_VOLTAGE),
-    WAXED_COPPER(WireStyle.COPPER, VoltaConfig.COPPER_WIRE_RESISTANCE, VoltaConfig.COPPER_WIRE_CURRENT_RATING, VoltaConfig.LOW_VOLTAGE),
-    INSULATED_COPPER(WireStyle.INSULATED_COPPER, VoltaConfig.COPPER_WIRE_RESISTANCE, VoltaConfig.COPPER_WIRE_CURRENT_RATING, VoltaConfig.MEDIUM_VOLTAGE);
+    COPPER(WireStyle.COPPER, VoltaConfig.COPPER_WIRE_RESISTANCE, VoltaConfig.COPPER_WIRE_CURRENT, VoltaConfig.MINIMAL_VOLTAGE),
+    WAXED_COPPER(WireStyle.COPPER, VoltaConfig.COPPER_WIRE_RESISTANCE, VoltaConfig.COPPER_WIRE_CURRENT, VoltaConfig.LOW_VOLTAGE),
+    INSULATED_COPPER(WireStyle.INSULATED_COPPER, VoltaConfig.COPPER_WIRE_RESISTANCE, VoltaConfig.COPPER_WIRE_CURRENT, VoltaConfig.MEDIUM_VOLTAGE),
+    RESISTIVE(WireStyle.RESISTIVE, VoltaConfig.RESISTIVE_WIRE_RESISTANCE, VoltaConfig.RESISTIVE_WIRE_CURRENT, VoltaConfig.LOW_VOLTAGE);
 
     private final WireStyle wireStyle;
     private final DoubleSupplier unitResistanceSupplier;

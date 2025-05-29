@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import volta.Volta;
 import volta.VoltaConfig;
+import volta.block.LeverVoltaBlock;
 import volta.block.VoltaBlocks;
 import volta.electricity.Simulation;
 import volta.electricity.Terminal;
@@ -22,27 +23,77 @@ import java.util.function.Supplier;
 public class VoltaBlockEntityTypes {
     private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Volta.ID);
 
-    private static final List<Vec3> DOUBLE_TERMINAL = List.of(
+    public static final List<Vec3> WALL_BRACKET_LIKE = List.of(
+            new Vec3(0.0, 0.0, -0.0625)
+    );
+
+    public static final List<Vec3> DOUBLE_WALL_BRACKET_LIKE = List.of(
+            new Vec3(0.0, -0.125, -0.0625), new Vec3(0.0, 0.125, -0.0625)
+    );
+
+    public static final List<Vec3> BREAKER_SWITCH_LIKE = List.of(
+            new Vec3(0.0, -0.4375, -0.4375), new Vec3(0.0, 0.4375, -0.4375)
+    );
+
+    public static final List<Vec3> SELECTOR_SWITCH_LIKE = List.of(
+            new Vec3(0.0, -0.4375, -0.4375), new Vec3(0.0, 0.4375, -0.4375),
+            new Vec3(-0.4375, 0.0, -0.4375), new Vec3(0.4375, 0.0, -0.4375)
+    );
+
+    public static final List<Vec3> DOUBLE_TERMINAL = List.of(
             new Vec3(0.0, 0.4375, -0.3125), new Vec3(0.0, 0.4375, 0.3125)
     );
 
-    private static final List<Vec3> TRI_TERMINAL = List.of(
+    public static final List<Vec3> TRI_TERMINAL = List.of(
             new Vec3(0.3125, 0.4375, -0.3125), new Vec3(-0.3125, 0.4375, -0.3125),
             new Vec3(0.0, 0.4375, 0.3125)
     );
 
-    private static final List<Vec3> QUAD_TERMINAL = List.of(
+    public static final List<Vec3> QUAD_TERMINAL = List.of(
             new Vec3(0.3125, 0.4375, -0.3125), new Vec3(-0.3125, 0.4375, -0.3125),
             new Vec3(-0.3125, 0.4375, 0.3125), new Vec3(0.3125, 0.4375, 0.3125)
     );
 
     public static final Supplier<VoltaBlockEntityType> WALL_BRACKET =
-            simple("wall_bracket", () -> VoltaBlocks.WALL_BRACKET,
-                    List.of(new Vec3(0.0, 0.0, -0.0625)));
+            simple("wall_bracket", () -> VoltaBlocks.WALL_BRACKET, WALL_BRACKET_LIKE);
 
     public static final Supplier<VoltaBlockEntityType> DOUBLE_WALL_BRACKET =
-            simple("double_wall_bracket", () -> VoltaBlocks.DOUBLE_WALL_BRACKET,
-                    List.of(new Vec3(0.0, -0.125, -0.0625), new Vec3(0.0, 0.125, -0.0625)));
+            simple("double_wall_bracket", () -> VoltaBlocks.DOUBLE_WALL_BRACKET, DOUBLE_WALL_BRACKET_LIKE);
+
+    public static final Supplier<VoltaBlockEntityType> BREAKER_SWITCH =
+            ticked("breaker_switch", () -> VoltaBlocks.BREAKER_SWITCH, BREAKER_SWITCH_LIKE, entity -> {
+                Simulation simulation = entity.getSimulation();
+                Terminal positive = entity.getTerminal(0);
+                Terminal negative = entity.getTerminal(1);
+                simulation.addConnection(positive, negative, new SwitchConnection());
+            }, entity -> {
+                Simulation simulation = entity.getSimulation();
+                Terminal positive = entity.getTerminal(0);
+                Terminal negative = entity.getTerminal(1);
+                boolean powered = entity.getBlockState().getValue(LeverVoltaBlock.POWERED);
+                simulation.findConnection(positive, negative, SwitchConnection.class).setClosed(powered);
+            });
+
+    public static final Supplier<VoltaBlockEntityType> SELECTOR_SWITCH =
+            ticked("selector_switch", () -> VoltaBlocks.SELECTOR_SWITCH, SELECTOR_SWITCH_LIKE, entity -> {
+                Simulation simulation = entity.getSimulation();
+                Terminal disengaged = entity.getTerminal(0);
+                Terminal engaged = entity.getTerminal(1);
+                Terminal bridgeL = entity.getTerminal(2);
+                Terminal bridgeR = entity.getTerminal(3);
+                simulation.addConnection(bridgeL, bridgeR, new ShortConnection());
+                simulation.addConnection(bridgeL, disengaged, new SwitchConnection());
+                simulation.addConnection(bridgeR, engaged, new SwitchConnection());
+            }, entity -> {
+                Simulation simulation = entity.getSimulation();
+                Terminal disengaged = entity.getTerminal(0);
+                Terminal engaged = entity.getTerminal(1);
+                Terminal bridgeL = entity.getTerminal(2);
+                Terminal bridgeR = entity.getTerminal(3);
+                boolean powered = entity.getBlockState().getValue(LeverVoltaBlock.POWERED);
+                simulation.findConnection(bridgeL, disengaged, SwitchConnection.class).setClosed(!powered);
+                simulation.findConnection(bridgeR, engaged, SwitchConnection.class).setClosed(powered);
+            });
 
     public static final Supplier<VoltaBlockEntityType> CREATIVE_CELL =
             initialized("creative_cell", () -> VoltaBlocks.CREATIVE_CELL, DOUBLE_TERMINAL, entity -> {
@@ -107,8 +158,8 @@ public class VoltaBlockEntityTypes {
                     Quantity.INDUCTANCE.format(VoltaConfig.INDUCTOR_BANK_INDUCTANCE.getAsDouble())
             ));
 
-    public static final Supplier<VoltaBlockEntityType> DIODE =
-            initialized("diode", () -> VoltaBlocks.DIODE, DOUBLE_TERMINAL, entity -> {
+    public static final Supplier<VoltaBlockEntityType> DIODE_BLOCK =
+            initialized("diode_block", () -> VoltaBlocks.DIODE_BLOCK, DOUBLE_TERMINAL, entity -> {
                 entity.getSimulation().addConnection(entity.getTerminal(1), entity.getTerminal(0),
                         new DiodeConnection() {
                             @Override
@@ -120,8 +171,8 @@ public class VoltaBlockEntityTypes {
                     Quantity.VOLTAGE_DROP.format(VoltaConfig.DIODE_VOLTAGE_DROP.getAsDouble())
             ));
 
-    public static final Supplier<VoltaBlockEntityType> NPN_TRANSISTOR =
-            initialized("npn_transistor", () -> VoltaBlocks.NPN_TRANSISTOR, TRI_TERMINAL, entity -> {
+    public static final Supplier<VoltaBlockEntityType> NPN_TRANSISTOR_BLOCK =
+            initialized("npn_transistor_block", () -> VoltaBlocks.NPN_TRANSISTOR_BLOCK, TRI_TERMINAL, entity -> {
                 entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
                         new NPNTransistorConnection(entity.getTerminal(2)) {
                             @Override
@@ -139,8 +190,8 @@ public class VoltaBlockEntityTypes {
                     Quantity.CURRENT_GAIN.format(VoltaConfig.TRANSISTOR_CURRENT_GAIN.getAsDouble())
             ));
 
-    public static final Supplier<VoltaBlockEntityType> PNP_TRANSISTOR =
-            initialized("pnp_transistor", () -> VoltaBlocks.PNP_TRANSISTOR, TRI_TERMINAL, entity -> {
+    public static final Supplier<VoltaBlockEntityType> PNP_TRANSISTOR_BLOCK =
+            initialized("pnp_transistor_block", () -> VoltaBlocks.PNP_TRANSISTOR_BLOCK, TRI_TERMINAL, entity -> {
                 entity.getSimulation().addConnection(entity.getTerminal(0), entity.getTerminal(1),
                         new PNPTransistorConnection(entity.getTerminal(2)) {
                             @Override
@@ -172,5 +223,9 @@ public class VoltaBlockEntityTypes {
 
     private static Supplier<VoltaBlockEntityType> persistent(String name, SuperSupplier<Block> blockSupplier, List<Vec3> terminals, VoltaBlockEntityType.Handler initializer, VoltaBlockEntityType.TagHandler loader, VoltaBlockEntityType.TagHandler saver, Supplier<List<Component>> tooltipSource) {
         return BLOCK_ENTITY_TYPES.register(name, () -> VoltaBlockEntityType.of(blockSupplier.getGet(), terminals).withInitializer(initializer).withLoader(loader).withSaver(saver).withTooltipSource(tooltipSource));
+    }
+
+    private static Supplier<VoltaBlockEntityType> ticked(String name, SuperSupplier<Block> blockSupplier, List<Vec3> terminals, VoltaBlockEntityType.Handler initializer, VoltaBlockEntityType.Handler ticker) {
+        return BLOCK_ENTITY_TYPES.register(name, () -> VoltaBlockEntityType.of(blockSupplier.getGet(), terminals).withInitializer(initializer).withTicker(ticker));
     }
 }

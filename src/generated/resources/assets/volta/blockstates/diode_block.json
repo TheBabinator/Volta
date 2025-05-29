@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "volta:block/diode",
+      "model": "volta:block/diode_block",
       "y": 90
     },
     "facing=north": {
-      "model": "volta:block/diode"
+      "model": "volta:block/diode_block"
     },
     "facing=south": {
-      "model": "volta:block/diode",
+      "model": "volta:block/diode_block",
       "y": 180
     },
     "facing=west": {
-      "model": "volta:block/diode",
+      "model": "volta:block/diode_block",
       "y": 270
     }
   }

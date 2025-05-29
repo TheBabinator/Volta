@@ -14,7 +14,7 @@ public enum Unit {
     METRE("metre"),
     JOULE("joule"),
     WATT("watt"),
-    OMS_PER_METRE("ohms_per_metre");
+    OHMS_PER_METRE("ohms_per_metre");
 
     private final String key;
 

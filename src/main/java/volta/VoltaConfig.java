@@ -16,7 +16,7 @@ public class VoltaConfig {
             .defineInRange("simulationQuality", 50, 1, 1000);
 
     public static final DoubleSupplier TERMINAL_CAPACITANCE = BUILDER.comment("The capacitance of every machine's terminals, measured in farads.")
-            .defineInRange("terminalCapacitance", 0.02, 0.001, 1.0);
+            .defineInRange("terminalCapacitance", 0.01, 0.001, 1.0);
 
     public static final DoubleSupplier MINIMAL_VOLTAGE = BUILDER.comment("The limit for typical minimal voltage, measured in volts.")
             .defineInRange("minimalVoltage", 10.0, 1.0, 1000000.0);
@@ -34,7 +34,7 @@ public class VoltaConfig {
             .defineInRange("extremeVoltage", 10000.0, 1.0, 1000000.0);
 
     public static final DoubleSupplier CREATIVE_CELL_SUPPLY_VOLTAGE = BUILDER.comment("The supply voltage of the creative cells, measured in volts.")
-            .defineInRange("creativeCellSupplyVoltage", 9.0, 1.0, 1000000.0);
+            .defineInRange("creativeCellSupplyVoltage", 100.0, 1.0, 1000000.0);
 
     public static final DoubleSupplier CAPACITOR_BANK_CAPACITANCE = BUILDER.comment("The capacitance of capacitor banks, measured in farads.")
             .defineInRange("capacitorBankCapacitance", 4.0, 1.0, 1000.0);
@@ -52,10 +52,16 @@ public class VoltaConfig {
             .defineInRange("transistorCurrentGain", 100.0, 1.0, 1000.0);
 
     public static final DoubleSupplier COPPER_WIRE_RESISTANCE = BUILDER.comment("The resistance of copper wire over its length, measured in ohms per metre.")
-            .defineInRange("copperWireResistance", 0.25, 0.001, 1000.0);
+            .defineInRange("copperWireUnitResistance", 0.25, 0.001, 1000.0);
 
-    public static final DoubleSupplier COPPER_WIRE_CURRENT_RATING = BUILDER.comment("The maximum safe current that can pass through copper wire, measured in amps.")
+    public static final DoubleSupplier COPPER_WIRE_CURRENT = BUILDER.comment("The maximum safe current that can pass through copper wire, measured in amps.")
             .defineInRange("copperWireCurrentRating", 5.0, 0.001, 1000.0);
+
+    public static final DoubleSupplier RESISTIVE_WIRE_RESISTANCE = BUILDER.comment("The resistance of resistive wire over its length, measured in ohms per metre.")
+            .defineInRange("resistiveWireUnitResistance", 10.0, 0.001, 1000.0);
+
+    public static final DoubleSupplier RESISTIVE_WIRE_CURRENT = BUILDER.comment("The maximum safe current that can pass through resistive wire, measured in amps.")
+            .defineInRange("resistiveWireCurrentRating", 5.0, 0.001, 1000.0);
 
     public static void register(IEventBus eventBus, ModContainer modContainer) {
         eventBus.addListener(VoltaConfig::onModConfig);

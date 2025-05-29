@@ -9,6 +9,7 @@
   "item.volta.copper_wire_spool": "Copper Wire Spool",
   "item.volta.waxed_copper_wire_spool": "Waxed Copper Wire Spool",
   "item.volta.insulated_copper_wire_spool": "Insulated Copper Wire Spool",
+  "item.volta.resistive_wire_spool": "Resistive Wire Spool",
 
   "item.volta.copper_wire": "Copper Wire",
   "item.volta.waxed_copper_wire": "Waxed Copper Wire",
@@ -17,11 +18,13 @@
   "block.volta.creative_cell": "Creative Cell",
   "block.volta.capacitor_bank": "Capacitor Bank",
   "block.volta.inductor_bank": "Inductor Bank",
-  "block.volta.diode": "Diode",
-  "block.volta.npn_transistor": "NPN Transistor",
-  "block.volta.pnp_transistor": "PNP Transistor",
+  "block.volta.diode_block": "Diode Block",
+  "block.volta.npn_transistor_block": "NPN Transistor Block",
+  "block.volta.pnp_transistor_block": "PNP Transistor Block",
   "block.volta.wall_bracket": "Wall Bracket",
   "block.volta.double_wall_bracket": "Double Wall Bracket",
+  "block.volta.breaker_switch": "Breaker Switch",
+  "block.volta.selector_switch": "Selector Switch",
 
   "quantity.voltage_reading": "Voltage Reading: ",
   "quantity.terminal_capacitance": "Terminal Capacitance: ",
@@ -41,6 +44,7 @@
   "unit.ohm": "Ω",
   "unit.farad": "F",
   "unit.henry": "H",
+  "unit.ohms_per_metre": "Ω/m",
 
   "prefix.giga": "G",
   "prefix.mega": "M",

@@ -1,9 +1,11 @@
-// 1.21.1	2025-05-26T12:36:56.473913848	Block States: volta
+// 1.21.1	2025-05-29T17:23:11.289068351	Block States: volta
+8d114b0bbff233d4a1174313e46e7fe7534831fb assets/volta/blockstates/breaker_switch.json
 1dcd3db442d533a227b3904498c37b72ce21fc99 assets/volta/blockstates/capacitor_bank.json
 4005639af5ddf54d39d31e74adb2166e1fedcdde assets/volta/blockstates/creative_cell.json
-154fb0b3a2c218e583321e1c0839b3c5d43fa57d assets/volta/blockstates/diode.json
+534b54cf9ff92d8e25feda3e41c2aca49e733f71 assets/volta/blockstates/diode_block.json
 88d8d4e8ed74de71feb3624cf4425d19daedd050 assets/volta/blockstates/double_wall_bracket.json
 d09f0283e422c9e4cbaaab2d44089a44d8759c22 assets/volta/blockstates/inductor_bank.json
-0e80e1a4f5ac47f1d9c133e881d900e5e7950a20 assets/volta/blockstates/npn_transistor.json
-25a83c22c9b2b03539c55d469081b384440de7a1 assets/volta/blockstates/pnp_transistor.json
+edb8a8ef3f897d33417b94864d927c3c41c977c0 assets/volta/blockstates/npn_transistor_block.json
+6a8944cf27922d262cc9e2c2fad6f2b8b03d2162 assets/volta/blockstates/pnp_transistor_block.json
+934d9ff2caee420549ffce323d268f0d3e639561 assets/volta/blockstates/selector_switch.json
 dce500e1330da09aeeedcd190659b7900ebd540f assets/volta/blockstates/wall_bracket.json

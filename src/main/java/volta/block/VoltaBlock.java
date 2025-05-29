@@ -38,7 +38,7 @@ public class VoltaBlock extends Block implements EntityBlock {
     public VoltaBlock(Supplier<VoltaBlockEntityType> typeSupplier, Properties properties) {
         super(properties);
         this.typeSupplier = typeSupplier;
-        registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
+        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 
     @Override
